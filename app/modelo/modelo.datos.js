@@ -12,14 +12,14 @@ module.exports = class Datos {
         return solucion
     }
 
-    async alta (){
+    async alta (data){
         let usuarioNuevo = [
-            this.datos.nombres, 
-            this.datos.apellidos,
-            this.datos.username, 
-            this.datos.email,
-            this.datos.password, 
-            this.datos.cpassword
+            data.nombres, 
+            data.apellidos,
+            data.username, 
+            data.email,
+            data.password, 
+            data.cpassword
         ]
         try {
             console.log('metodo' + this.datos)
@@ -33,9 +33,13 @@ module.exports = class Datos {
     }
 
     async eliminar (usuario){
+        let usuarioBaja = [
+            usuario.username
+        ]
         try {
             console.log('metodo' + this.datos);
-            let resultado = await sequelize.query(`DELETE FROM usuarios WHERE username = ${this.datos.username} `)
+            let resultado = await sequelize.query(`DELETE FROM usuarios WHERE username = ? `,
+            {replacements : usuarioBaja, type : sequelize.QueryType.SELECT)
             let solucion = resultado [0][0]
             return solucion
         } catch (e) {
@@ -45,6 +49,6 @@ module.exports = class Datos {
     }
 
     async modificar (){
-
+        
     }
 }
