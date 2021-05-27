@@ -12,9 +12,9 @@ module.exports.listarUsuarios = async ()=>{
 
 module.exports.altaUsuarios = async (data)=>{
     try {
-        let nuevoUsuario = new usuarios(data)
-        let resultado = await nuevoUsuario.alta()
-        console.log(resultado);
+        let resultado = await usuarios.alta(data)
+        //console.log(resultado);
+      
         return 'Alta correcta'
     } catch (e) {
         console.log(e);
@@ -24,8 +24,8 @@ module.exports.altaUsuarios = async (data)=>{
 
 module.exports.bajaUsuario = async (data) => {
     try {
-        let usuarioBaja = new usuarios(data)
-        let resultado = await usuarioBaja.eliminar()
+       
+        let resultado = await usuarios.eliminar(data)
         console.log(resultado);
         return 'Baja correcta'
     } catch (e) {

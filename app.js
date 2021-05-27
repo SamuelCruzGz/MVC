@@ -3,6 +3,7 @@ var app = express ()
 require ('dotenv').config()
 const sequelize = require ('./db/db.conexion')
 const Datos = require ('./db/db.tablaDatos')
+const vistaDatos = require ('./app/vista/vista.usuarios')
 
 app.use(express.json())
 
@@ -35,3 +36,5 @@ app.use((err, req, res, next)=>{
     }
     next()
 })
+
+vistaDatos(app)

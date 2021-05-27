@@ -5,26 +5,28 @@ module.exports = class Datos {
         this.datos = datos
     }
 
-    async listar (){
-        console.log('metodo ' + this.datos)
+    static async listar (){
+        //console.log('metodo ' + this.datos)
         let resultado = await sequelize.query('SELECT * FROM usuarios')
-        let solucion = resultado [0][0][this.datos]
-        return solucion
+      
+        console.log(resultado);
+        return resultado
     }
 
-    async alta (data){
+    static async alta (data){
         let usuarioNuevo = [
             data.nombres, 
             data.apellidos,
             data.username, 
             data.email,
-            data.password, 
+            data.pass, 
             data.cpassword
         ]
         try {
-            console.log('metodo' + this.datos)
-            let resultado = await sequelize.query(`INSERT INTO (nombres, apellidos, username, email, password, cpassword) VALUES (?,?,?,?,?)`,
-            {replacements : usuarioNuevo, type: sequelize.QueryType.SELECT})
+            let resultado = await sequelize.query(`INSERT INTO usuarios(nombres, apellidos, username, email, pass, cpassword) VALUES (?,?,?,?,?,?)`,
+            {replacements : usuarioNuevo, type: sequelize.QueryTypes.SELECT})
+           
+
             return resultado
         } catch (e) {
             console.log(e);
@@ -32,16 +34,16 @@ module.exports = class Datos {
         }
     }
 
-    async eliminar (usuario){
+    static async eliminar (usuario){
         let usuarioBaja = [
             usuario.username
         ]
         try {
             console.log('metodo' + this.datos);
             let resultado = await sequelize.query(`DELETE FROM usuarios WHERE username = ? `,
-            {replacements : usuarioBaja, type : sequelize.QueryType.SELECT)
-            let solucion = resultado [0][0]
-            return solucion
+            {replacements : usuarioBaja, type : sequelize.QueryTypes.SELECT})
+           
+            return resultado
         } catch (e) {
             console.log(e);
             throw new Error ('Ocurrio un error al realizar la baja')
