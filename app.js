@@ -4,7 +4,7 @@ require ('dotenv').config()
 const sequelize = require ('./db/db.conexion')
 const Datos = require ('./db/db.tablaDatos')
 const vistaDatos = require ('./app/vista/vista.usuarios')
-
+//update
 app.use(express.json())
 
 app.use(express.static(__dirname + '/public'))
